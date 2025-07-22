@@ -35,10 +35,14 @@
   <div id="timeline-embed" style="width: 100%; height: 600px"></div>
 
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
-  <script>
-    var options = {
-      language: 'de',
-      initial_zoom: 2
-    };
+<script>
+  var options = {
+    language: 'de',
+    initial_zoom: 2
+  };
 
-    var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml'
+  var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
+
+  window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
+</script>
+
