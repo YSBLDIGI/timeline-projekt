@@ -41,4 +41,71 @@
     /* Zeitachse (Datumsbeschriftung) */
     .tl-timeaxis-tick-text {
       font-family: 'Work Sans', sans-serif !important;
-      color: #858c8c !impor
+      color: #858c8c !important; /* Grau-Blau 03 */
+      font-weight: 300 !important;
+    }
+
+    /* Gruppenbeschriftung (Jahreszahlen) */
+    .tl-timegroup-message {
+      font-family: 'Work Sans', sans-serif !important;
+      background-color: #555959 !important; /* Grau-Blau 04 */
+      color: #ffffff !important;
+      font-weight: 300 !important;
+    }
+
+    /* Symbole links unten (Lupe, Pfeile, Play) – vergrößern */
+    .tl-menubar-button {
+      width: 36px !important;
+      height: 36px !important;
+      font-size: 20px !important;
+    }
+
+    /* Optional: Abstand leicht erhöhen, wenn nötig */
+    .tl-menubar {
+      padding: 6px !important;
+    }
+
+    /* Mobile-Optimierung */
+    @media only screen and (max-width: 600px) {
+      .tl-slide .tl-headline {
+        font-size: 18px !important;
+      }
+
+      .tl-slide .tl-text-content {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+      }
+
+      .tl-timeaxis-tick-text {
+        font-size: 12px !important;
+      }
+
+      .tl-timegroup-message {
+        font-size: 13px !important;
+        padding: 4px 8px !important;
+      }
+
+      .tl-menubar-button {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 22px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="timeline-embed" style="width: 100%; height: 1000px;"></div>
+
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+  <script>
+    var options = {
+      language: 'de',
+      initial_zoom: 2
+    };
+
+    var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
+
+    window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
+  </script>
+</body>
+</html>
