@@ -7,7 +7,7 @@
   <!-- TimelineJS-Stile -->
   <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
 
-  <!-- Google Fonts (Ersatz für OCR-F & Univers) -->
+  <!-- Google Fonts (CI/CD-konform) -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Work+Sans:wght@300;700&display=swap" rel="stylesheet">
 
   <style>
@@ -29,6 +29,8 @@
       font-family: 'Work Sans', sans-serif !important;
       font-weight: 300 !important;
       color: #000000 !important; /* Schwarz */
+      font-size: 16px !important;
+      line-height: 1.5 !important;
     }
 
     /* Slide-Hintergrund */
@@ -50,10 +52,32 @@
       color: #ffffff !important;
       font-weight: 300 !important;
     }
+
+    /* Responsive Optimierung für Mobilgeräte */
+    @media only screen and (max-width: 600px) {
+      .tl-slide .tl-headline {
+        font-size: 18px !important;
+      }
+
+      .tl-slide .tl-text-content {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+      }
+
+      .tl-timeaxis-tick-text {
+        font-size: 12px !important;
+      }
+
+      .tl-timegroup-message {
+        font-size: 13px !important;
+        padding: 4px 8px !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <div id="timeline-embed" style="width: 100%; height: 600px"></div>
+  <!-- Mindesthöhe erhöht -->
+  <div id="timeline-embed" style="width: 100%; height: 1000px;"></div>
 
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
   <script>
