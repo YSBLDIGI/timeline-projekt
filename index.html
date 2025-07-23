@@ -16,131 +16,252 @@
       background-color: #ffffff;
     }
 
-    /* Titel / Headlines */
+    /* Desktop-Styles */
     .tl-slide .tl-headline {
       font-family: 'Share Tech Mono', monospace !important;
-      color: #ff0000 !important; /* BL-Rot */
+      color: #ff0000 !important;
       text-transform: uppercase !important;
       font-weight: normal !important;
     }
 
-    /* Fließtext */
     .tl-slide .tl-text-content {
       font-family: 'Work Sans', sans-serif !important;
       font-weight: 300 !important;
-      color: #000000 !important; /* Schwarz */
+      color: #000000 !important;
       font-size: 16px !important;
       line-height: 1.5 !important;
     }
 
-    /* Slide-Hintergrund */
     .tl-slide-content {
-      background-color: #e6f2f2 !important; /* Grau-Blau 01 */
+      background-color: #e6f2f2 !important;
     }
 
-    /* Zeitachse (Datumsbeschriftung) */
     .tl-timeaxis-tick-text {
       font-family: 'Work Sans', sans-serif !important;
-      color: #858c8c !important; /* Grau-Blau 03 */
+      color: #858c8c !important;
       font-weight: 300 !important;
     }
 
-    /* Gruppenbeschriftung (Jahreszahlen) */
     .tl-timegroup-message {
       font-family: 'Work Sans', sans-serif !important;
-      background-color: #555959 !important; /* Grau-Blau 04 */
+      background-color: #555959 !important;
       color: #ffffff !important;
       font-weight: 300 !important;
     }
 
-    /* Mobile-Optimierung */
-    @media only screen and (max-width: 600px) {
-      .tl-slide-content {
-        padding: 10px !important;
+    /* MOBILE-OPTIMIERUNG - verstärkte Selektoren */
+    @media only screen and (max-width: 768px) {
+      /* Timeline-Container */
+      #timeline-embed .tl-timeline {
+        font-size: 14px !important;
       }
 
-      .tl-slide .tl-headline {
+      /* Slide-Inhalte */
+      #timeline-embed .tl-slide-content {
+        padding: 15px !important;
+        background-color: #e6f2f2 !important;
+      }
+
+      #timeline-embed .tl-slide .tl-headline {
+        font-family: 'Share Tech Mono', monospace !important;
+        color: #ff0000 !important;
+        font-size: 20px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 12px !important;
+        text-transform: uppercase !important;
+        font-weight: normal !important;
+      }
+
+      #timeline-embed .tl-slide .tl-text-content,
+      #timeline-embed .tl-slide .tl-text-content p {
+        font-family: 'Work Sans', sans-serif !important;
+        font-weight: 300 !important;
+        color: #000000 !important;
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 10px !important;
+      }
+
+      /* Zeitachse kompakter machen */
+      #timeline-embed .tl-timeaxis {
+        height: 35px !important;
+        min-height: 35px !important;
+      }
+
+      #timeline-embed .tl-timeaxis .tl-timeaxis-content-container {
+        height: 35px !important;
+      }
+
+      #timeline-embed .tl-timeaxis-tick {
+        height: 30px !important;
+      }
+
+      #timeline-embed .tl-timeaxis-tick-text {
+        font-size: 12px !important;
+        color: #858c8c !important;
+        font-family: 'Work Sans', sans-serif !important;
+        font-weight: 300 !important;
+      }
+
+      /* Zeitachsen-Marker kleiner */
+      #timeline-embed .tl-timeaxis-tick-timespan {
+        height: 25px !important;
+      }
+
+      /* Navigation/Zoom-Buttons vergrößern */
+      #timeline-embed .tl-menubar {
+        padding: 8px !important;
+        background-color: rgba(255, 255, 255, 0.9) !important;
+      }
+
+      #timeline-embed .tl-menubar-button {
+        width: 44px !important;
+        height: 44px !important;
+        margin: 2px !important;
+        background-size: 24px !important;
+        background-position: center !important;
+        border-radius: 4px !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+      }
+
+      /* Jahresgruppen-Nachrichten */
+      #timeline-embed .tl-timegroup-message {
+        font-family: 'Work Sans', sans-serif !important;
+        background-color: #555959 !important;
+        color: #ffffff !important;
+        font-weight: 300 !important;
+        font-size: 13px !important;
+        padding: 6px 10px !important;
+      }
+
+      /* Slide-Navigation */
+      #timeline-embed .tl-slider-container-navigation {
+        bottom: 45px !important;
+      }
+
+      /* Media-Elemente responsive */
+      #timeline-embed .tl-media {
+        max-width: 100% !important;
+      }
+
+      #timeline-embed .tl-media img {
+        max-width: 100% !important;
+        height: auto !important;
+      }
+    }
+
+    /* Extra kleine Bildschirme */
+    @media only screen and (max-width: 480px) {
+      #timeline-embed .tl-slide .tl-headline {
         font-size: 18px !important;
       }
 
-      .tl-slide .tl-text-content {
-        font-size: 14px !important;
-        line-height: 1.4 !important;
+      #timeline-embed .tl-slide .tl-text-content,
+      #timeline-embed .tl-slide .tl-text-content p {
+        font-size: 15px !important;
       }
 
-      .tl-timeaxis {
+      #timeline-embed .tl-timeaxis {
+        height: 30px !important;
+        min-height: 30px !important;
+      }
+
+      #timeline-embed .tl-menubar-button {
+        width: 40px !important;
         height: 40px !important;
-      }
-
-      .tl-timeaxis-tick-text {
-        font-size: 11px !important;
-      }
-
-      .tl-timeaxis-tick {
-        transform: scale(0.9);
-      }
-
-      .tl-menubar-button {
-        transform: scale(1.5);
-        transform-origin: left center;
-      }
-
-      .tl-menubar {
-        padding: 6px !important;
+        background-size: 20px !important;
       }
     }
   </style>
 </head>
 <body>
-  <div id="timeline-embed" style="width: 100%; height: 1000px;"></div>
+  <div id="timeline-embed" style="width: 100%; height: 100vh; min-height: 600px;"></div>
 
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
   <script>
     var options = {
       language: 'de',
-      initial_zoom: 2
+      initial_zoom: 2,
+      zoom_sequence: [0.5, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89],
+      optimal_tick_width: 100,
+      scale_factor: 2,
+      start_at_slide: 0,
+      menubar_height: 0
     };
 
     var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
 
+    // Timeline initialisieren
     window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
 
-    // Workaround zur Nachanwendung von Styles
-    function reapplyStyles() {
-      const cssRules = `
-        .tl-slide-content { background-color: #e6f2f2 !important; }
-        .tl-slide .tl-headline {
-          font-family: 'Share Tech Mono', monospace !important;
-          color: #ff0000 !important;
-          text-transform: uppercase !important;
-          font-weight: normal !important;
-          font-size: 18px !important;
+    // Mobile-Styles mehrfach anwenden für bessere Durchsetzung
+    function enforceMobileStyles() {
+      if (window.innerWidth <= 768) {
+        const mobileCSS = `
+          #timeline-embed .tl-timeaxis {
+            height: 35px !important;
+            min-height: 35px !important;
+          }
+          #timeline-embed .tl-timeaxis .tl-timeaxis-content-container {
+            height: 35px !important;
+          }
+          #timeline-embed .tl-menubar-button {
+            width: 44px !important;
+            height: 44px !important;
+            margin: 2px !important;
+            background-size: 24px !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+          }
+          #timeline-embed .tl-slide .tl-headline {
+            font-size: 20px !important;
+            line-height: 1.3 !important;
+            margin-bottom: 12px !important;
+          }
+          #timeline-embed .tl-slide .tl-text-content,
+          #timeline-embed .tl-slide .tl-text-content p {
+            font-size: 16px !important;
+            line-height: 1.6 !important;
+          }
+        `;
+        
+        // Style-Element erstellen und hinzufügen
+        const styleEl = document.createElement('style');
+        styleEl.id = 'mobile-enforcement';
+        styleEl.innerHTML = mobileCSS;
+        
+        // Altes Element entfernen falls vorhanden
+        const oldStyle = document.getElementById('mobile-enforcement');
+        if (oldStyle) {
+          oldStyle.remove();
         }
-        .tl-slide .tl-text-content {
-          font-family: 'Work Sans', sans-serif !important;
-          font-weight: 300 !important;
-          color: #000000 !important;
-          font-size: 14px !important;
-          line-height: 1.4 !important;
-        }
-        .tl-timeaxis { height: 40px !important; }
-        .tl-timeaxis-tick-text {
-          font-size: 11px !important;
-          color: #858c8c !important;
-        }
-        .tl-menubar-button {
-          transform: scale(1.5);
-          transform-origin: left center;
-        }
-      `;
-      const styleEl = document.createElement('style');
-      styleEl.innerHTML = cssRules;
-      document.head.appendChild(styleEl);
+        
+        document.head.appendChild(styleEl);
+      }
     }
 
-    // Wende die Styles verzögert an, damit die Timeline geladen ist
-    window.addEventListener('load', () => {
-      setTimeout(reapplyStyles, 1000);
+    // Styles bei verschiedenen Events anwenden
+    window.timeline.on('loaded', function() {
+      setTimeout(enforceMobileStyles, 100);
+      setTimeout(enforceMobileStyles, 500);
+      setTimeout(enforceMobileStyles, 1000);
+    });
+
+    // Bei Resize erneut anwenden
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(enforceMobileStyles, 250);
+    });
+
+    // Initial nach DOM-Load
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(enforceMobileStyles, 500);
+    });
+
+    // Fallback nach vollständigem Laden
+    window.addEventListener('load', function() {
+      setTimeout(enforceMobileStyles, 1000);
+      setTimeout(enforceMobileStyles, 2000);
     });
   </script>
 </body>
