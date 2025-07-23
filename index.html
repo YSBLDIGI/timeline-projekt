@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <title>Meine Timeline</title>
 
-  <!-- TimelineJS-Stile -->
-  <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+  <!-- TimelineJS CSS -->
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
 
-  <!-- Google Fonts (CI/CD-konform) -->
+  <!-- Google Fonts für CI/CD-konforme Schriften -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Work+Sans:wght@300;700&display=swap" rel="stylesheet">
 
   <style>
@@ -16,14 +16,15 @@
       background-color: #ffffff;
     }
 
-    /* Desktop-Styles */
+    /* Titel / Headlines */
     .tl-slide .tl-headline {
       font-family: 'Share Tech Mono', monospace !important;
-      color: #ff0000 !important;
+      color: #ff0000 !important; /* BL-Rot */
       text-transform: uppercase !important;
       font-weight: normal !important;
     }
 
+    /* Fließtext */
     .tl-slide .tl-text-content {
       font-family: 'Work Sans', sans-serif !important;
       font-weight: 300 !important;
@@ -32,125 +33,54 @@
       line-height: 1.5 !important;
     }
 
+    /* Slide-Hintergrund */
     .tl-slide-content {
-      background-color: #e6f2f2 !important;
+      background-color: #e6f2f2 !important; /* Grau-Blau 01 */
     }
 
+    /* Zeitachse (Datumsbeschriftung) */
     .tl-timeaxis-tick-text {
       font-family: 'Work Sans', sans-serif !important;
-      color: #858c8c !important;
+      color: #858c8c !important; /* Grau-Blau 03 */
       font-weight: 300 !important;
     }
 
+    /* Jahres-Gruppen */
     .tl-timegroup-message {
       font-family: 'Work Sans', sans-serif !important;
-      background-color: #555959 !important;
+      background-color: #555959 !important; /* Grau-Blau 04 */
       color: #ffffff !important;
       font-weight: 300 !important;
     }
 
+    /* Nötige Mobile-Anpassungen */
+    @media (max-width: 768px) {
+      .tl-slide .tl-headline {
+        font-size: 18px !important;
+      }
+
+      .tl-slide .tl-text-content {
+        font-size: 15px !important;
+      }
+
+      .tl-timegroup-message {
+        font-size: 13px !important;
+        padding: 4px 6px !important;
+      }
+    }
   </style>
 </head>
 <body>
   <div id="timeline-embed" style="width: 100%; height: 100vh; min-height: 600px;"></div>
 
+  <!-- TimelineJS JS -->
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
   <script>
     var options = {
       language: 'de',
-      initial_zoom: 2,
-      zoom_sequence: [0.5, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89],
-      optimal_tick_width: 100,
-      scale_factor: 2,
-      start_at_slide: 0,
-      menubar_height: 0
+      initial_zoom: 2
     };
 
     var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
 
-    // Timeline initialisieren
-    window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
-
-    // Mobile-Styles mehrfach anwenden für bessere Durchsetzung
-    function enforceMobileStyles() {
-      if (window.innerWidth <= 768) {
-        const mobileCSS = `
-          #timeline-embed .tl-timeaxis {
-            height: 20px !important;
-            min-height: 20px !important;
-            max-height: 20px !important;
-          }
-          #timeline-embed .tl-timeaxis .tl-timeaxis-content-container {
-            height: 20px !important;
-            min-height: 20px !important;
-          }
-          #timeline-embed .tl-slider-container-mask {
-            bottom: 25px !important;
-          }
-          #timeline-embed .tl-menubar-button {
-            width: 48px !important;
-            height: 48px !important;
-            margin: 3px !important;
-            border-radius: 6px !important;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
-            background-color: #ffffff !important;
-            border: 1px solid #ddd !important;
-          }
-          #timeline-embed .tl-menubar-button:before {
-            transform: scale(1.8) !important;
-            opacity: 0.8 !important;
-          }
-          #timeline-embed .tl-slide .tl-headline {
-            font-size: 20px !important;
-            line-height: 1.3 !important;
-            margin-bottom: 12px !important;
-          }
-          #timeline-embed .tl-slide .tl-text-content,
-          #timeline-embed .tl-slide .tl-text-content p {
-            font-size: 16px !important;
-            line-height: 1.6 !important;
-          }
-        `;
-        
-        // Style-Element erstellen und hinzufügen
-        const styleEl = document.createElement('style');
-        styleEl.id = 'mobile-enforcement';
-        styleEl.innerHTML = mobileCSS;
-        
-        // Altes Element entfernen falls vorhanden
-        const oldStyle = document.getElementById('mobile-enforcement');
-        if (oldStyle) {
-          oldStyle.remove();
-        }
-        
-        document.head.appendChild(styleEl);
-      }
-    }
-
-    // Styles bei verschiedenen Events anwenden
-    window.timeline.on('loaded', function() {
-      setTimeout(enforceMobileStyles, 100);
-      setTimeout(enforceMobileStyles, 500);
-      setTimeout(enforceMobileStyles, 1000);
-    });
-
-    // Bei Resize erneut anwenden
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(enforceMobileStyles, 250);
-    });
-
-    // Initial nach DOM-Load
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(enforceMobileStyles, 500);
-    });
-
-    // Fallback nach vollständigem Laden
-    window.addEventListener('load', function() {
-      setTimeout(enforceMobileStyles, 1000);
-      setTimeout(enforceMobileStyles, 2000);
-    });
-  </script>
-</body>
-</html>
+    window.timeline = new TL.Timeline('timeline-e
