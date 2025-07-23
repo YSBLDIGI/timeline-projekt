@@ -82,46 +82,74 @@
         margin-bottom: 10px !important;
       }
 
-      /* Zeitachse kompakter machen */
+      /* Zeitachse viel kompakter machen */
       #timeline-embed .tl-timeaxis {
-        height: 35px !important;
-        min-height: 35px !important;
+        height: 20px !important;
+        min-height: 20px !important;
+        max-height: 20px !important;
       }
 
       #timeline-embed .tl-timeaxis .tl-timeaxis-content-container {
-        height: 35px !important;
+        height: 20px !important;
+        min-height: 20px !important;
       }
 
       #timeline-embed .tl-timeaxis-tick {
-        height: 30px !important;
+        height: 18px !important;
+        max-height: 18px !important;
       }
 
       #timeline-embed .tl-timeaxis-tick-text {
-        font-size: 12px !important;
+        font-size: 10px !important;
         color: #858c8c !important;
         font-family: 'Work Sans', sans-serif !important;
         font-weight: 300 !important;
+        line-height: 1 !important;
       }
 
       /* Zeitachsen-Marker kleiner */
       #timeline-embed .tl-timeaxis-tick-timespan {
-        height: 25px !important;
+        height: 15px !important;
       }
 
-      /* Navigation/Zoom-Buttons vergrößern */
+      /* Timeline-Hauptbereich mehr Platz geben */
+      #timeline-embed .tl-timeline {
+        padding-bottom: 25px !important;
+      }
+
+      /* Slide-Bereich vergrößern */
+      #timeline-embed .tl-slider-container-mask {
+        bottom: 25px !important;
+      }
+
+      /* Navigation/Zoom-Buttons deutlich vergrößern */
       #timeline-embed .tl-menubar {
-        padding: 8px !important;
-        background-color: rgba(255, 255, 255, 0.9) !important;
+        padding: 4px !important;
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        border-radius: 6px !important;
       }
 
       #timeline-embed .tl-menubar-button {
-        width: 44px !important;
-        height: 44px !important;
-        margin: 2px !important;
-        background-size: 24px !important;
-        background-position: center !important;
-        border-radius: 4px !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+        width: 48px !important;
+        height: 48px !important;
+        margin: 3px !important;
+        border-radius: 6px !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+        background-color: #ffffff !important;
+        border: 1px solid #ddd !important;
+      }
+
+      /* Button-Icons vergrößern */
+      #timeline-embed .tl-menubar-button:before {
+        transform: scale(1.8) !important;
+        opacity: 0.8 !important;
+      }
+
+      /* Spezifische Button-Styles */
+      #timeline-embed .tl-menubar-zoom-in,
+      #timeline-embed .tl-menubar-zoom-out {
+        font-size: 24px !important;
+        font-weight: bold !important;
       }
 
       /* Jahresgruppen-Nachrichten */
@@ -134,9 +162,9 @@
         padding: 6px 10px !important;
       }
 
-      /* Slide-Navigation */
+      /* Slide-Navigation weiter unten positionieren */
       #timeline-embed .tl-slider-container-navigation {
-        bottom: 45px !important;
+        bottom: 30px !important;
       }
 
       /* Media-Elemente responsive */
@@ -162,14 +190,22 @@
       }
 
       #timeline-embed .tl-timeaxis {
-        height: 30px !important;
-        min-height: 30px !important;
+        height: 18px !important;
+        min-height: 18px !important;
+        max-height: 18px !important;
+      }
+
+      #timeline-embed .tl-timeaxis .tl-timeaxis-content-container {
+        height: 18px !important;
       }
 
       #timeline-embed .tl-menubar-button {
-        width: 40px !important;
-        height: 40px !important;
-        background-size: 20px !important;
+        width: 44px !important;
+        height: 44px !important;
+      }
+
+      #timeline-embed .tl-menubar-button:before {
+        transform: scale(1.6) !important;
       }
     }
   </style>
@@ -199,18 +235,29 @@
       if (window.innerWidth <= 768) {
         const mobileCSS = `
           #timeline-embed .tl-timeaxis {
-            height: 35px !important;
-            min-height: 35px !important;
+            height: 20px !important;
+            min-height: 20px !important;
+            max-height: 20px !important;
           }
           #timeline-embed .tl-timeaxis .tl-timeaxis-content-container {
-            height: 35px !important;
+            height: 20px !important;
+            min-height: 20px !important;
+          }
+          #timeline-embed .tl-slider-container-mask {
+            bottom: 25px !important;
           }
           #timeline-embed .tl-menubar-button {
-            width: 44px !important;
-            height: 44px !important;
-            margin: 2px !important;
-            background-size: 24px !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+            width: 48px !important;
+            height: 48px !important;
+            margin: 3px !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+            background-color: #ffffff !important;
+            border: 1px solid #ddd !important;
+          }
+          #timeline-embed .tl-menubar-button:before {
+            transform: scale(1.8) !important;
+            opacity: 0.8 !important;
           }
           #timeline-embed .tl-slide .tl-headline {
             font-size: 20px !important;
