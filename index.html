@@ -53,8 +53,9 @@
       font-weight: 300 !important;
     }
 
-    /* Responsive Optimierung für Mobilgeräte */
+    /* Mobile-Optimierung */
     @media only screen and (max-width: 600px) {
+      /* Textgrößen anpassen */
       .tl-slide .tl-headline {
         font-size: 18px !important;
       }
@@ -65,18 +66,38 @@
       }
 
       .tl-timeaxis-tick-text {
-        font-size: 12px !important;
+        font-size: 11px !important;
       }
 
       .tl-timegroup-message {
         font-size: 13px !important;
         padding: 4px 8px !important;
       }
+
+      /* Zeitachse unten kompakter */
+      .tl-timeaxis {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        height: 40px !important;
+      }
+
+      .tl-timeaxis-tick {
+        transform: scale(0.9);
+      }
+
+      /* Zoom / Pfeil-Icons größer darstellen */
+      .tl-menubar-button {
+        transform: scale(1.5);
+        transform-origin: left center;
+      }
+
+      .tl-menubar {
+        padding: 6px !important;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Mindesthöhe erhöht -->
   <div id="timeline-embed" style="width: 100%; height: 1000px;"></div>
 
   <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
