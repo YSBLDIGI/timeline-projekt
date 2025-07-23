@@ -10,92 +10,86 @@
   <!-- Google Fonts (CI/CD-konform) -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Work+Sans:wght@300;700&display=swap" rel="stylesheet">
 
-  <style>
+<style>
+  body {
+    font-family: 'Work Sans', sans-serif;
+    background-color: #ffffff;
+  }
+
+  .tl-slide .tl-headline {
+    font-family: 'Share Tech Mono', monospace !important;
+    color: #ff0000 !important;
+    text-transform: uppercase !important;
+    font-weight: normal !important;
+  }
+
+  .tl-slide .tl-text-content {
+    font-family: 'Work Sans', sans-serif !important;
+    font-weight: 300 !important;
+    color: #000000 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+
+  .tl-slide-content {
+    background-color: #e6f2f2 !important;
+  }
+
+  .tl-timeaxis-tick-text {
+    font-family: 'Work Sans', sans-serif !important;
+    color: #858c8c !important;
+    font-weight: 300 !important;
+  }
+
+  .tl-timegroup-message {
+    font-family: 'Work Sans', sans-serif !important;
+    background-color: #555959 !important;
+    color: #ffffff !important;
+    font-weight: 300 !important;
+  }
+
+  /* ✳️ Verstärkte Mobile-Optimierung */
+  @media only screen and (max-width: 600px) {
     body {
-      font-family: 'Work Sans', sans-serif;
-      background-color: #ffffff;
+      font-size: 14px;
     }
 
-    /* Titel / Headlines */
-    .tl-slide .tl-headline {
-      font-family: 'Share Tech Mono', monospace !important;
-      color: #ff0000 !important; /* BL-Rot */
-      text-transform: uppercase !important;
-      font-weight: normal !important;
-    }
-
-    /* Fließtext */
-    .tl-slide .tl-text-content {
-      font-family: 'Work Sans', sans-serif !important;
-      font-weight: 300 !important;
-      color: #000000 !important; /* Schwarz */
-      font-size: 16px !important;
-      line-height: 1.5 !important;
-    }
-
-    /* Slide-Hintergrund */
     .tl-slide-content {
-      background-color: #e6f2f2 !important; /* Grau-Blau 01 */
+      padding: 10px !important;
     }
 
-    /* Zeitachse (Datumsbeschriftung) */
+    .tl-slide .tl-headline {
+      font-size: 18px !important;
+    }
+
+    .tl-slide .tl-text-content {
+      font-size: 14px !important;
+      line-height: 1.4 !important;
+    }
+
+    .tl-timeaxis {
+      height: 40px !important;
+    }
+
     .tl-timeaxis-tick-text {
-      font-family: 'Work Sans', sans-serif !important;
-      color: #858c8c !important; /* Grau-Blau 03 */
-      font-weight: 300 !important;
+      font-size: 11px !important;
     }
 
-    /* Gruppenbeschriftung (Jahreszahlen) */
-    .tl-timegroup-message {
-      font-family: 'Work Sans', sans-serif !important;
-      background-color: #555959 !important; /* Grau-Blau 04 */
-      color: #ffffff !important;
-      font-weight: 300 !important;
+    .tl-timeaxis-tick {
+      transform: scale(0.9);
     }
 
-    /* Mobile-Optimierung */
-    @media only screen and (max-width: 600px) {
-      /* Textgrößen anpassen */
-      .tl-slide .tl-headline {
-        font-size: 18px !important;
-      }
-
-      .tl-slide .tl-text-content {
-        font-size: 14px !important;
-        line-height: 1.4 !important;
-      }
-
-      .tl-timeaxis-tick-text {
-        font-size: 11px !important;
-      }
-
-      .tl-timegroup-message {
-        font-size: 13px !important;
-        padding: 4px 8px !important;
-      }
-
-      /* Zeitachse unten kompakter */
-      .tl-timeaxis {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-        height: 40px !important;
-      }
-
-      .tl-timeaxis-tick {
-        transform: scale(0.9);
-      }
-
-      /* Zoom / Pfeil-Icons größer darstellen */
-      .tl-menubar-button {
-        transform: scale(1.5);
-        transform-origin: left center;
-      }
-
-      .tl-menubar {
-        padding: 6px !important;
-      }
+    .tl-menubar-button {
+      transform: scale(1.5);
+      transform-origin: left center;
     }
-  </style>
+
+    .tl-menubar {
+      padding: 6px !important;
+    }
+  }
+</style>
+
 </head>
 <body>
   <div id="timeline-embed" style="width: 100%; height: 1000px;"></div>
