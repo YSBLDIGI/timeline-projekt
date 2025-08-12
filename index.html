@@ -8,11 +8,11 @@
   <!-- TimelineJS-Stile -->
   <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
 
-  <!-- Roboto von Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts (Roboto) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
 
   <style>
-    /* CI/CD: Fonts, Farben und Layout gemäss kantonalem Erscheinungsbild BL */
+    /* CI/CD: Fonts, Farben und Layout */
     body {
       margin: 0;
       padding: 0;
@@ -21,18 +21,18 @@
       background-color: #ffffff;
     }
 
-    /* Titel / Headlines im IFrame */
+    /* Titel / Headlines */
     .tl-slide .tl-headline {
       font-family: 'Roboto', sans-serif !important;
-      font-weight: 700 !important; /* Fett */
       color: #ff0000 !important; /* BL-Rot */
-      text-transform: none !important; /* Originalschreibung beibehalten */
+      font-weight: 700 !important; /* Fett */
+      text-transform: none !important; /* Groß-/Kleinschreibung beibehalten */
     }
 
     /* Fließtext */
     .tl-slide .tl-text-content {
       font-family: 'Roboto', sans-serif !important;
-      font-weight: 400 !important;
+      font-weight: 300 !important;
       color: #000000 !important; /* Schwarz */
       font-size: 16px !important;
       line-height: 1.5 !important;
@@ -55,14 +55,14 @@
       font-family: 'Roboto', sans-serif !important;
       background-color: #555959 !important; /* Grau-Blau 04 */
       color: #ffffff !important;
-      font-weight: 400 !important;
+      font-weight: 300 !important;
     }
 
-    /* Symbole links unten (Lupe, Pfeile, Play) */
+    /* Symbole links unten (Lupe, Pfeile, Play) dynamisch skalieren */
     .tl-menubar-button {
-      width: 36px !important;
-      height: 36px !important;
-      font-size: 20px !important;
+      width: clamp(28px, 4vh, 36px) !important;
+      height: clamp(28px, 4vh, 36px) !important;
+      font-size: clamp(16px, 2vh, 20px) !important;
     }
 
     .tl-menubar {
@@ -92,7 +92,7 @@
   </style>
 </head>
 <body>
-  <!-- Ladeanzeige (verschwindet nach Timeline-Initialisierung) -->
+  <!-- Ladeanzeige -->
   <div id="timeline-loader" style="text-align:center; padding:20px; font-family:'Roboto',sans-serif; color:#858c8c;">
     Lade Timeline …
   </div>
