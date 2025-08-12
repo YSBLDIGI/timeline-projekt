@@ -12,6 +12,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Work+Sans:wght@300;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ===== Skalierung für die Bedienelemente (ein Punkt zum Nachjustieren) ===== */
+    :root{
+      /* Button-Kantenlänge: min 26px, bevorzugt ~2.3vh, max 34px */
+      --ctrl-size: clamp(26px, 2.3vh, 34px);
+      /* Icon-Grösse relativ zum Button */
+      --icon-size: calc(var(--ctrl-size) * 0.55);
+      /* Menubar-Padding relativ */
+      --menubar-pad: calc(var(--ctrl-size) * 0.17);
+    }
+
     /* CI/CD: Fonts, Farben und Layout gemäss kantonalem Erscheinungsbild BL */
     body {
       margin: 0;
@@ -58,36 +68,26 @@
       font-weight: 300 !important;
     }
 
-    /* Symbole links unten (Lupe, Pfeile, Play) */
-    .tl-menubar-button {
-      width: 36px !important;
-      height: 36px !important;
-      font-size: 20px !important;
-    }
-
+    /* ===== Bedienelemente unten links (Lupe, Pfeile, Play) – proportional skalieren ===== */
     .tl-menubar {
-      padding: 6px !important;
+      padding: var(--menubar-pad) !important;
+    }
+    .tl-menubar-button {
+      width: var(--ctrl-size) !important;
+      height: var(--ctrl-size) !important;
+      font-size: var(--icon-size) !important; /* greift bei Buttons mit Icon-Font */
+      line-height: var(--ctrl-size) !important; /* zentriert das Icon vertikal */
+    }
+    .tl-menubar-button:before {
+      font-size: var(--icon-size) !important; /* zusätzliche Absicherung */
     }
 
-    /* Mobile-Optimierung */
-    @media only screen and (max-width: 600px) {
-      .tl-slide .tl-headline {
-        font-size: 18px !important;
-      }
-
-      .tl-slide .tl-text-content {
-        font-size: 14px !important;
-        line-height: 1.4 !important;
-      }
-
-      .tl-timeaxis-tick-text {
-        font-size: 12px !important;
-      }
-
-      .tl-timegroup-message {
-        font-size: 13px !important;
-        padding: 4px 8px !important;
-      }
+    /* Mobile-Optimierung (nur Typografie, keine Layout-Eingriffe) */
+    @media (max-width: 600px) {
+      .tl-slide .tl-headline { font-size: 18px !important; }
+      .tl-slide .tl-text-content { font-size: 14px !important; line-height: 1.4 !important; }
+      .tl-timeaxis-tick-text { font-size: 12px !important; }
+      .tl-timegroup-message { font-size: 13px !important; padding: 4px 8px !important; }
     }
   </style>
 </head>
