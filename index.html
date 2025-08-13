@@ -8,8 +8,8 @@
   <!-- TimelineJS-Stile -->
   <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
 
-  <!-- Google Fonts (Roboto) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts (Roboto: 300/400/700) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
     /* CI/CD: Fonts, Farben und Layout */
@@ -21,19 +21,21 @@
       background-color: #ffffff;
     }
 
-    /* Titel / Headlines */
+    /* Titel / Headlines (nicht fett, kleiner, BL-Rot) */
     .tl-slide .tl-headline {
       font-family: 'Roboto', sans-serif !important;
-      color: #ff0000 !important; /* BL-Rot */
-      font-weight: 700 !important; /* Fett */
-      text-transform: none !important; /* Gross-/Kleinschreibung beibehalten */
+      color: #ff0000 !important;          /* BL-Rot */
+      font-weight: 400 !important;         /* nicht fett */
+      font-size: 22px !important;          /* kleiner als vorher */
+      line-height: 1.3 !important;
+      text-transform: none !important;     /* Gross-/Kleinschreibung beibehalten */
     }
 
     /* Fließtext */
     .tl-slide .tl-text-content {
       font-family: 'Roboto', sans-serif !important;
       font-weight: 300 !important;
-      color: #000000 !important; /* Schwarz */
+      color: #000000 !important;           /* Schwarz */
       font-size: 16px !important;
       line-height: 1.5 !important;
     }
@@ -43,14 +45,18 @@
       background-color: #e6f2f2 !important; /* Grau-Blau 01 */
     }
 
-    /* Zeitachse (Datumsbeschriftung) */
-    .tl-timeaxis-tick-text {
+    /* Datum / Zeitachsen-Beschriftungen: Roboto + keine Uppercase */
+    .tl-timeaxis-tick-text,
+    .tl-timeaxis .tl-timeaxis-major,
+    .tl-timeaxis .tl-timeaxis-minor,
+    .tl-slide .tl-headline-date,
+    .tl-slide .tl-date {
       font-family: 'Roboto', sans-serif !important;
-      color: #858c8c !important; /* Grau-Blau 03 */
-      font-weight: 300 !important;
+      text-transform: none !important;     /* KEIN erzwungenes Uppercase */
+      color: #858c8c !important;           /* Grau-Blau 03 für Achse */
     }
 
-    /* Gruppenbeschriftung (Jahreszahlen) */
+    /* Jahresgruppen */
     .tl-timegroup-message {
       font-family: 'Roboto', sans-serif !important;
       background-color: #555959 !important; /* Grau-Blau 04 */
@@ -66,14 +72,15 @@
     }
     .tl-menubar { padding: 6px !important; }
 
-    /* Mobile: Bildhöhe deckeln, Typo leicht kompakter, damit Slide nicht intern scrollt */
+    /* Mobile: Media begrenzen, Typo kompakter halten */
     @media (max-width: 600px) {
-      /* Bild (Media) auf ca. 40% der Viewport-Höhe begrenzen */
       .tl-media,
       .tl-media .tl-media-content,
-      .tl-media .tl-media-image img {
-        max-height: 40vh !important;
+      .tl-media .tl-media-image img,
+      .tl-media .tl-media-iframe iframe {
+        max-height: 35vh !important;
         height: auto !important;
+        width: 100% !important;
         object-fit: cover !important;
       }
 
