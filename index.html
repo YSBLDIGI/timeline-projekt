@@ -93,6 +93,28 @@
   font-weight: 300 !important;
 }
 
+    /* Headline-Datum: Uppercase zuverlässig brechen */
+.tl-slide .tl-headline-date,
+.tl-slide .tl-headline .tl-headline-date,
+.tl-slide .tl-text .tl-headline-date {
+  font-family: 'Roboto', sans-serif !important;
+  text-transform: lowercase !important;        /* erst alles klein */
+  letter-spacing: normal !important;           /* falls Build letter-spacing setzt */
+}
+
+/* Ersten Buchstaben wieder groß */
+.tl-slide .tl-headline-date::first-letter {
+  text-transform: uppercase !important;
+}
+
+/* Fallback: manchmal steckt Datum in .tl-date innerhalb der Headline */
+.tl-slide .tl-headline-date .tl-date {
+  text-transform: lowercase !important;
+}
+.tl-slide .tl-headline-date .tl-date::first-letter {
+  text-transform: uppercase !important;
+}
+
 
     /* Mobile: Media begrenzen, Typo kompakter halten */
     @media (max-width: 600px) {
@@ -153,4 +175,5 @@
   </script>
 </body>
 </html>
+
 
