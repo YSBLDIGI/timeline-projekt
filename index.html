@@ -1,183 +1,178 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>Meine Timeline</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Meine Timeline</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- TimelineJS-Stile -->
-  <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+<!-- TimelineJS-Stile -->
+<link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
 
-  <!-- Google Fonts (Roboto: 300/400/700) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- Google Fonts (Roboto: 300/400/700) -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* CI/CD: Fonts, Farben und Layout */
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      font-family: 'Roboto', sans-serif;
-      background-color: #ffffff;
-    }
+<style>
+/* CI/CD: Fonts, Farben und Layout */
+body {
+margin: 0;
+padding: 0;
+height: 100vh;
+font-family: 'Roboto', sans-serif;
+background-color: #ffffff;
+}
 
-    /* Titel / Headlines (nicht fett, kleiner, BL-Rot) */
-    .tl-slide .tl-headline {
-      font-family: 'Roboto', sans-serif !important;
-      color: #ff0000 !important;          /* BL-Rot */
-      font-weight: 400 !important;         /* nicht fett */
-      font-size: 22px !important;          /* kleiner */
-      line-height: 1.3 !important;
-      text-transform: none !important;     /* Gross-/Kleinschreibung beibehalten */
-    }
+/* Titel / Headlines (nicht fett, kleiner, BL-Rot) */
+.tl-slide .tl-headline {
+font-family: 'Roboto', sans-serif !important;
+color: #ff0000 !important;          /* BL-Rot */
+font-weight: 400 !important;         /* nicht fett */
+font-size: 22px !important;          /* kleiner als vorher */
+line-height: 1.3 !important;
+text-transform: none !important;     /* Gross-/Kleinschreibung beibehalten */
+}
 
-    /* Fließtext */
-    .tl-slide .tl-text-content {
-      font-family: 'Roboto', sans-serif !important;
-      font-weight: 300 !important;
-      color: #000000 !important;           /* Schwarz */
-      font-size: 16px !important;
-      line-height: 1.5 !important;
-    }
+/* Fließtext */
+.tl-slide .tl-text-content {
+font-family: 'Roboto', sans-serif !important;
+font-weight: 300 !important;
+color: #000000 !important;           /* Schwarz */
+font-size: 16px !important;
+line-height: 1.5 !important;
+}
 
-    /* Slide-Hintergrund */
-    .tl-slide-content {
-      background-color: #e6f2f2 !important; /* Grau-Blau 01 */
-    }
+/* Slide-Hintergrund */
+.tl-slide-content {
+background-color: #e6f2f2 !important; /* Grau-Blau 01 */
+}
 
-    /* Zeitachse & Datum */
-    .tl-timeaxis-tick-text,
-    .tl-timeaxis .tl-timeaxis-major,
-    .tl-timeaxis .tl-timeaxis-minor,
-    .tl-slide .tl-date {
-      font-family: 'Roboto', sans-serif !important;
-      text-transform: none !important;
-      color: #858c8c !important;           /* Grau-Blau 03 */
-    }
+/* Datum / Zeitachsen-Beschriftungen: Roboto + keine Uppercase */
+.tl-timeaxis-tick-text,
+.tl-timeaxis .tl-timeaxis-major,
+.tl-timeaxis .tl-timeaxis-minor,
+.tl-slide .tl-headline-date,
+.tl-slide .tl-date {
+font-family: 'Roboto', sans-serif !important;
+text-transform: none !important;     /* KEIN erzwungenes Uppercase */
+color: #858c8c !important;           /* Grau-Blau 03 für Achse */
+}
 
-    /* Datum oberhalb des Titels */
-    .tl-slide .tl-headline-date {
-      font-family: 'Roboto', sans-serif !important;
-      text-transform: none !important;     /* wichtig: kein Upper-/Lowercase erzwingen */
-      font-weight: 300 !important;
-      letter-spacing: normal !important;
-    }
+/* Jahresgruppen */
+.tl-timegroup-message {
+font-family: 'Roboto', sans-serif !important;
+background-color: #555959 !important; /* Grau-Blau 04 */
+color: #ffffff !important;
+font-weight: 300 !important;
+}
 
-    /* Pfeil-Navigation */
-    .tl-slidenav-title,
-    .tl-slidenav-description {
-      font-family: 'Roboto', sans-serif !important;
-      text-transform: none !important;
-      font-weight: 300 !important;
-    }
+/* Symbole links unten (Lupe, Pfeile, Play) – dynamisch skalieren */
+.tl-menubar-button {
+width: clamp(28px, 4vh, 36px) !important;
+height: clamp(28px, 4vh, 36px) !important;
+font-size: clamp(16px, 2vh, 20px) !important;
+}
+.tl-menubar { padding: 6px !important; }
 
-    /* Jahresgruppen */
-    .tl-timegroup-message {
-      font-family: 'Roboto', sans-serif !important;
-      background-color: #555959 !important; /* Grau-Blau 04 */
-      color: #ffffff !important;
-      font-weight: 300 !important;
-    }
+/* Datum oberhalb des Titels in Slides */
+.tl-slide .tl-headline-date {
+font-family: 'Roboto', sans-serif !important;
+text-transform: none !important;
+font-weight: 300 !important;
+}
 
-    /* Symbole links unten – dynamisch skalieren */
-    .tl-menubar-button {
-      width: clamp(28px, 4vh, 36px) !important;
-      height: clamp(28px, 4vh, 36px) !important;
-      font-size: clamp(16px, 2vh, 20px) !important;
-    }
-    .tl-menubar { padding: 6px !important; }
+/* Navigationstitel bei den Pfeilen */
+.tl-slidenav-title {
+font-family: 'Roboto', sans-serif !important;
+text-transform: none !important;
+font-weight: 300 !important;
+}
 
-    /* Mobile: Media begrenzen, Typo kompakter */
-    @media (max-width: 600px) {
-      .tl-media,
-      .tl-media .tl-media-content,
-      .tl-media .tl-media-image img,
-      .tl-media .tl-media-iframe iframe {
-        max-height: 35vh !important;
-        height: auto !important;
-        width: 100% !important;
-        object-fit: cover !important;
-      }
+/* Navigationstext unter dem Titel (bei Pfeilen) */
+.tl-slidenav-description {
+font-family: 'Roboto', sans-serif !important;
+text-transform: none !important;
+font-weight: 300 !important;
+}
 
-      .tl-slide .tl-headline {
-        font-size: 18px !important;
-        line-height: 1.25 !important;
-      }
-      .tl-slide .tl-text-content {
-        font-size: 14px !important;
-        line-height: 1.4 !important;
-      }
-      .tl-timeaxis-tick-text {
-        font-size: 12px !important;
-      }
-      .tl-timegroup-message {
-        font-size: 13px !important;
-        padding: 4px 8px !important;
-      }
-    }
-  </style>
+    /* Headline-Datum: Uppercase zuverlässig brechen */
+.tl-slide .tl-headline-date,
+.tl-slide .tl-headline .tl-headline-date,
+.tl-slide .tl-text .tl-headline-date {
+  font-family: 'Roboto', sans-serif !important;
+  text-transform: lowercase !important;        /* erst alles klein */
+  letter-spacing: normal !important;           /* falls Build letter-spacing setzt */
+}
+
+/* Ersten Buchstaben wieder groß */
+.tl-slide .tl-headline-date::first-letter {
+  text-transform: uppercase !important;
+}
+
+/* Fallback: manchmal steckt Datum in .tl-date innerhalb der Headline */
+.tl-slide .tl-headline-date .tl-date {
+  text-transform: lowercase !important;
+}
+.tl-slide .tl-headline-date .tl-date::first-letter {
+  text-transform: uppercase !important;
+}
+
+
+/* Mobile: Media begrenzen, Typo kompakter halten */
+@media (max-width: 600px) {
+.tl-media,
+.tl-media .tl-media-content,
+.tl-media .tl-media-image img,
+.tl-media .tl-media-iframe iframe {
+max-height: 35vh !important;
+height: auto !important;
+width: 100% !important;
+object-fit: cover !important;
+}
+
+.tl-slide .tl-headline {
+font-size: 18px !important;
+line-height: 1.25 !important;
+}
+.tl-slide .tl-text-content {
+font-size: 14px !important;
+line-height: 1.4 !important;
+}
+.tl-timeaxis-tick-text {
+font-size: 12px !important;
+}
+.tl-timegroup-message {
+font-size: 13px !important;
+padding: 4px 8px !important;
+}
+}
+</style>
 </head>
 <body>
-  <!-- Ladeanzeige -->
-  <div id="timeline-loader" style="text-align:center; padding:20px; font-family:'Roboto',sans-serif; color:#858c8c;">
-    Lade Timeline …
-  </div>
+<!-- Ladeanzeige -->
+<div id="timeline-loader" style="text-align:center; padding:20px; font-family:'Roboto',sans-serif; color:#858c8c;">
+Lade Timeline …
+</div>
 
-  <!-- Responsive Timeline-Container -->
-  <div id="timeline-embed" style="width: 100%; height: 100vh; display: none;"></div>
+<!-- Responsive Timeline-Container -->
+<div id="timeline-embed" style="width: 100%; height: 100vh; display: none;"></div>
 
-  <!-- TimelineJS -->
-  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
-  <script>
-    var options = {
-      language: 'de',
-      initial_zoom: 2
-    };
+<!-- TimelineJS -->
+<script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+<script>
+var options = {
+language: 'de',
+initial_zoom: 2
+};
 
-    var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
+var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
 
-    // Timeline initialisieren
-    window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
+window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
 
-    // Datumsnormalisierung (Monatsnamen korrekt kapitalisieren)
-    function normalizeHeadlineDates() {
-      var map = {
-        'januar':'Januar','februar':'Februar','märz':'März','maerz':'März',
-        'april':'April','mai':'Mai','juni':'Juni','juli':'Juli',
-        'august':'August','september':'September','oktober':'Oktober',
-        'november':'November','dezember':'Dezember',
-        'jan.':'Jan.','feb.':'Feb.','mär.':'Mär.','maer.':'Mär.','apr.':'Apr.','mai.':'Mai.',
-        'jun.':'Jun.','jul.':'Jul.','aug.':'Aug.','sep.':'Sep.','okt.':'Okt.','nov.':'Nov.','dez.':'Dez.'
-      };
-
-      document.querySelectorAll('#timeline-embed .tl-headline-date').forEach(function(el){
-        var txt = el.textContent;
-        // alles in Lowercase holen, dann gezielt ersetzen
-        var lower = txt.toLowerCase();
-
-        // ersetze alle bekannten Monatsnamen/Abkürzungen
-        Object.keys(map).forEach(function(key){
-          var re = new RegExp('\\b' + key.replace('.', '\\.') + '\\b', 'g');
-          lower = lower.replace(re, map[key]);
-        });
-
-        // anwenden
-        el.textContent = lower;
-      });
-    }
-
-    // Loader → sichtbar nach Laden
-    window.timeline.on('loaded', function () {
-      document.getElementById('timeline-loader').style.display = 'none';
-      document.getElementById('timeline-embed').style.display = 'block';
-      normalizeHeadlineDates();
-    });
-
-    // Auf spätere Änderungen reagieren (Slide-Wechsel etc.)
-    var obs = new MutationObserver(function(){
-      normalizeHeadlineDates();
-    });
-    obs.observe(document.getElementById('timeline-embed'), { childList: true, subtree: true });
-  </script>
+// Ladeanzeige ausblenden, sobald geladen
+window.timeline.on('loaded', function () {
+document.getElementById('timeline-loader').style.display = 'none';
+document.getElementById('timeline-embed').style.display = 'block';
+});
+</script>
 </body>
 </html>
+
