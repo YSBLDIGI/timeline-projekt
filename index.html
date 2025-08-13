@@ -14,100 +14,98 @@
 <style>
 /* CI/CD: Fonts, Farben und Layout */
 body {
-margin: 0;
-padding: 0;
-height: 100vh;
-font-family: 'Roboto', sans-serif;
-background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background-color: #ffffff;
 }
 
 /* Titel / Headlines (nicht fett, kleiner, BL-Rot) */
 .tl-slide .tl-headline {
-font-family: 'Roboto', sans-serif !important;
-color: #ff0000 !important;          /* BL-Rot */
-font-weight: 400 !important;         /* nicht fett */
-font-size: 22px !important;          /* kleiner als vorher */
-line-height: 1.3 !important;
-text-transform: none !important;     /* Gross-/Kleinschreibung beibehalten */
+  font-family: 'Roboto', sans-serif !important;
+  color: #ff0000 !important;
+  font-weight: 400 !important;
+  font-size: 22px !important;
+  line-height: 1.3 !important;
+  text-transform: none !important;
 }
 
 /* Fließtext */
 .tl-slide .tl-text-content {
-font-family: 'Roboto', sans-serif !important;
-font-weight: 300 !important;
-color: #000000 !important;           /* Schwarz */
-font-size: 16px !important;
-line-height: 1.5 !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300 !important;
+  color: #000000 !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
 }
 
 /* Slide-Hintergrund */
 .tl-slide-content {
-background-color: #e6f2f2 !important; /* Grau-Blau 01 */
+  background-color: #e6f2f2 !important;
 }
 
-/* Datum / Zeitachsen-Beschriftungen: Roboto + keine Uppercase */
+/* Datum / Zeitachsen-Beschriftungen */
 .tl-timeaxis-tick-text,
 .tl-timeaxis .tl-timeaxis-major,
 .tl-timeaxis .tl-timeaxis-minor,
 .tl-slide .tl-headline-date,
 .tl-slide .tl-date {
-font-family: 'Roboto', sans-serif !important;
-text-transform: none !important;     /* KEIN erzwungenes Uppercase */
-color: #858c8c !important;           /* Grau-Blau 03 für Achse */
+  font-family: 'Roboto', sans-serif !important;
+  text-transform: none !important;
+  color: #858c8c !important;
 }
 
 /* Jahresgruppen */
 .tl-timegroup-message {
-font-family: 'Roboto', sans-serif !important;
-background-color: #555959 !important; /* Grau-Blau 04 */
-color: #ffffff !important;
-font-weight: 300 !important;
+  font-family: 'Roboto', sans-serif !important;
+  background-color: #555959 !important;
+  color: #ffffff !important;
+  font-weight: 300 !important;
 }
 
-/* Symbole links unten (Lupe, Pfeile, Play) – dynamisch skalieren */
+/* Symbole links unten */
 .tl-menubar-button {
-width: clamp(28px, 4vh, 36px) !important;
-height: clamp(28px, 4vh, 36px) !important;
-font-size: clamp(16px, 2vh, 20px) !important;
+  width: clamp(28px, 4vh, 36px) !important;
+  height: clamp(28px, 4vh, 36px) !important;
+  font-size: clamp(16px, 2vh, 20px) !important;
 }
 .tl-menubar { padding: 6px !important; }
 
 /* Datum oberhalb des Titels in Slides */
 .tl-slide .tl-headline-date {
-font-family: 'Roboto', sans-serif !important;
-text-transform: none !important;
-font-weight: 300 !important;
+  font-family: 'Roboto', sans-serif !important;
+  text-transform: none !important;
+  font-weight: 300 !important;
 }
 
 /* Navigationstitel bei den Pfeilen */
 .tl-slidenav-title {
-font-family: 'Roboto', sans-serif !important;
-text-transform: none !important;
-font-weight: 300 !important;
+  font-family: 'Roboto', sans-serif !important;
+  text-transform: none !important;
+  font-weight: 300 !important;
 }
 
-/* Navigationstext unter dem Titel (bei Pfeilen) */
+/* Navigationstext unter dem Titel */
 .tl-slidenav-description {
-font-family: 'Roboto', sans-serif !important;
-text-transform: none !important;
-font-weight: 300 !important;
+  font-family: 'Roboto', sans-serif !important;
+  text-transform: none !important;
+  font-weight: 300 !important;
 }
 
-    /* Headline-Datum: Uppercase zuverlässig brechen */
+/* Headline-Datum: Lowercase + First letter uppercase */
 .tl-slide .tl-headline-date,
 .tl-slide .tl-headline .tl-headline-date,
 .tl-slide .tl-text .tl-headline-date {
   font-family: 'Roboto', sans-serif !important;
-  text-transform: lowercase !important;        /* erst alles klein */
-  letter-spacing: normal !important;           /* falls Build letter-spacing setzt */
+  text-transform: lowercase !important;
+  letter-spacing: normal !important;
 }
-
-/* Ersten Buchstaben wieder groß */
 .tl-slide .tl-headline-date::first-letter {
   text-transform: uppercase !important;
 }
 
-/* Fallback: manchmal steckt Datum in .tl-date innerhalb der Headline */
+/* Fallback */
 .tl-slide .tl-headline-date .tl-date {
   text-transform: lowercase !important;
 }
@@ -115,41 +113,40 @@ font-weight: 300 !important;
   text-transform: uppercase !important;
 }
 
-
-/* Mobile: Media begrenzen, Typo kompakter halten */
+/* Mobile */
 @media (max-width: 600px) {
-.tl-media,
-.tl-media .tl-media-content,
-.tl-media .tl-media-image img,
-.tl-media .tl-media-iframe iframe {
-max-height: 35vh !important;
-height: auto !important;
-width: 100% !important;
-object-fit: cover !important;
-}
+  .tl-media,
+  .tl-media .tl-media-content,
+  .tl-media .tl-media-image img,
+  .tl-media .tl-media-iframe iframe {
+    max-height: 35vh !important;
+    height: auto !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
 
-.tl-slide .tl-headline {
-font-size: 18px !important;
-line-height: 1.25 !important;
-}
-.tl-slide .tl-text-content {
-font-size: 14px !important;
-line-height: 1.4 !important;
-}
-.tl-timeaxis-tick-text {
-font-size: 12px !important;
-}
-.tl-timegroup-message {
-font-size: 13px !important;
-padding: 4px 8px !important;
-}
+  .tl-slide .tl-headline {
+    font-size: 18px !important;
+    line-height: 1.25 !important;
+  }
+  .tl-slide .tl-text-content {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+  }
+  .tl-timeaxis-tick-text {
+    font-size: 12px !important;
+  }
+  .tl-timegroup-message {
+    font-size: 13px !important;
+    padding: 4px 8px !important;
+  }
 }
 </style>
 </head>
 <body>
 <!-- Ladeanzeige -->
 <div id="timeline-loader" style="text-align:center; padding:20px; font-family:'Roboto',sans-serif; color:#858c8c;">
-Lade Timeline …
+  Lade Timeline …
 </div>
 
 <!-- Responsive Timeline-Container -->
@@ -159,20 +156,34 @@ Lade Timeline …
 <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 <script>
 var options = {
-language: 'de',
-initial_zoom: 2
+  language: 'de',
+  initial_zoom: 2
 };
 
 var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
 
 window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
 
-// Ladeanzeige ausblenden, sobald geladen
+// Ladeanzeige ausblenden, sobald geladen & Monatsnamen korrigieren
 window.timeline.on('loaded', function () {
-document.getElementById('timeline-loader').style.display = 'none';
-document.getElementById('timeline-embed').style.display = 'block';
+  document.getElementById('timeline-loader').style.display = 'none';
+  document.getElementById('timeline-embed').style.display = 'block';
+
+  // Monate in Ranges groß schreiben
+  const monate = [
+    "januar","februar","märz","april","mai","juni",
+    "juli","august","september","oktober","november","dezember"
+  ];
+  
+  document.querySelectorAll('.tl-headline-date').forEach(el => {
+    let text = el.innerHTML;
+    monate.forEach(m => {
+      const regex = new RegExp("\\b" + m + "\\b", "g");
+      text = text.replace(regex, m.charAt(0).toUpperCase() + m.slice(1));
+    });
+    el.innerHTML = text;
+  });
 });
 </script>
 </body>
 </html>
-
