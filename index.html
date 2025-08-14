@@ -120,46 +120,55 @@ body {
   letter-spacing: normal !important; /* falls Timeline die Abstände für Uppercase erhöht */
 }
 
-/* === Roboto überall im Timeline-Embed erzwingen === */
+/* === Roboto für alle Texte – Icon-Fonts explizit ausnehmen === */
+
+/* 1) Roboto standardmäßig für Text */
 #timeline-embed,
 #timeline-embed * {
   font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
 }
 
-/* SVG-Beschriftungen (Zeitachse, Marker) */
+/* 2) AUSNAHMEN: Icon-Fonts & Navigationspfeile NICHT überschreiben */
+#timeline-embed [class^="tl-icon"],
+#timeline-embed [class*=" tl-icon"],
+#timeline-embed .tl-slidenav-next,
+#timeline-embed .tl-slidenav-previous,
+#timeline-embed .tl-slidenav-icon,
+#timeline-embed .tl-menubar-button .tl-icon,
+#timeline-embed .tl-menubar-button .tl-button-icon,
+#timeline-embed .tl-menubar-button [class^="tl-icon"],
+#timeline-embed .tl-menubar-button [class*=" tl-icon"] {
+  font-family: revert !important;   /* nimmt die Icon-Font aus timeline.css */
+  font-style: revert !important;
+  font-weight: revert !important;
+}
+
+/* 3) SVG-Beschriftungen (Zeitachse, Marker) weiterhin Roboto */
 #timeline-embed svg text,
 #timeline-embed .tl-timeaxis svg text {
   font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
 }
 
-/* Buttons, Menubar, Tooltips, Attribution */
-#timeline-embed .tl-menubar,
-#timeline-embed .tl-menubar * ,
-#timeline-embed .tl-message,
+/* 4) Typische Textbereiche extra absichern (optional) */
+#timeline-embed .tl-slide,
+#timeline-embed .tl-headline,
+#timeline-embed .tl-headline-date,
+#timeline-embed .tl-text-content,
+#timeline-embed .tl-timegroup-message,
 #timeline-embed .tl-caption,
 #timeline-embed .tl-credit,
 #timeline-embed .tl-attribution,
-#timeline-embed .tl-tooltip,
+#timeline-embed .tl-message,
 #timeline-embed .tl-slidenav-title,
 #timeline-embed .tl-slidenav-description {
   font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
 }
 
-/* Headline/Date/Text in Slides – doppelt absichern */
-#timeline-embed .tl-slide,
-#timeline-embed .tl-slide * ,
-#timeline-embed .tl-headline,
-#timeline-embed .tl-headline-date,
-#timeline-embed .tl-text-content {
-  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
-}
-
-/* Optional: etwas sauberere Darstellung auf Windows */
+/* 5) Glättung (v. a. Windows) */
 #timeline-embed {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 </style>
 </head>
 <body>
@@ -200,14 +209,12 @@ body {
       textNodes.forEach(tn => {
         let t = tn.nodeValue;
 
-        // Normalisieren: alles klein (um etwaige Uppercase-Quellen zu neutralisieren)
-        // Hinweis: Zahlen/Punkte bleiben unverändert.
+        // Normalisieren: alles klein
         const lowered = t.toLocaleLowerCase('de-DE');
 
-        // Nur ganze Monats-Wörter ersetzen (mit Wortgrenzen)
+        // Nur ganze Monats-Wörter ersetzen
         const fixed = lowered.replace(new RegExp(`\\b(${MONTH_WORDS})\\b`, 'g'), m => MONTH_MAP[m]);
 
-        // In den Textknoten zurückschreiben
         tn.nodeValue = fixed;
       });
     });
@@ -224,13 +231,9 @@ body {
   // Beobachte spätere Slide-Wechsel/Neurender
   const target = document.getElementById('timeline-embed');
   const obs = new MutationObserver(() => {
-    // Leicht debouncen
     requestAnimationFrame(() => fixHeadlineDates(target));
   });
   obs.observe(target, { childList: true, subtree: true });
 </script>
 </body>
 </html>
-
-
-
