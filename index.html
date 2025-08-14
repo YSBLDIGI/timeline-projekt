@@ -119,7 +119,47 @@ body {
   text-transform: none !important;
   letter-spacing: normal !important; /* falls Timeline die Abstände für Uppercase erhöht */
 }
-  
+
+/* === Roboto überall im Timeline-Embed erzwingen === */
+#timeline-embed,
+#timeline-embed * {
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
+}
+
+/* SVG-Beschriftungen (Zeitachse, Marker) */
+#timeline-embed svg text,
+#timeline-embed .tl-timeaxis svg text {
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
+}
+
+/* Buttons, Menubar, Tooltips, Attribution */
+#timeline-embed .tl-menubar,
+#timeline-embed .tl-menubar * ,
+#timeline-embed .tl-message,
+#timeline-embed .tl-caption,
+#timeline-embed .tl-credit,
+#timeline-embed .tl-attribution,
+#timeline-embed .tl-tooltip,
+#timeline-embed .tl-slidenav-title,
+#timeline-embed .tl-slidenav-description {
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
+}
+
+/* Headline/Date/Text in Slides – doppelt absichern */
+#timeline-embed .tl-slide,
+#timeline-embed .tl-slide * ,
+#timeline-embed .tl-headline,
+#timeline-embed .tl-headline-date,
+#timeline-embed .tl-text-content {
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
+}
+
+/* Optional: etwas sauberere Darstellung auf Windows */
+#timeline-embed {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 </style>
 </head>
 <body>
@@ -191,5 +231,6 @@ body {
 </script>
 </body>
 </html>
+
 
 
