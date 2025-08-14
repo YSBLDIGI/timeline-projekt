@@ -121,53 +121,61 @@ body {
 <!-- TimelineJS -->
 <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 <script>
-  var options = {
-    language: 'de',
-    initial_zoom: 2
-  };
-
+  var options = { language: 'de', initial_zoom: 2 };
   var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
 
   window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
 
-  // Hilfsfunktion: Textknoten in einem Element durchgehen und Monatsnamen kapitalisieren
-  function capitalizeGermanMonthsIn(el) {
-    const map = {
-      'januar':'Januar', 'februar':'Februar', 'märz':'März',
-      'april':'April', 'mai':'Mai', 'juni':'Juni',
-      'juli':'Juli', 'august':'August', 'september':'September',
-      'oktober':'Oktober', 'november':'November', 'dezember':'Dezember'
-    };
-    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
-    let node;
-    while ((node = walker.nextNode())) {
-      let t = node.nodeValue;
-      // ganze Wörter ersetzen (inkl. Umlaute)
-      for (const [low, cap] of Object.entries(map)) {
-        t = t.replace(new RegExp("\\b" + low + "\\b", "g"), cap);
-      }
-      node.nodeValue = t;
-    }
+  // Helfer: Monatsnamen in deutsches "Satz-Case" bringen
+  const MONTH_MAP = {
+    'januar':'Januar','februar':'Februar','märz':'März','april':'April','mai':'Mai','juni':'Juni',
+    'juli':'Juli','august':'August','september':'September','oktober':'Oktober','november':'November','dezember':'Dezember'
+  };
+  const MONTH_WORDS = Object.keys(MONTH_MAP).join('|'); // regex: januar|februar|...
+
+  function fixHeadlineDates(root=document) {
+    const nodes = root.querySelectorAll('.tl-headline-date');
+    nodes.forEach(el => {
+      // Uppercase aus Timeline-CSS aushebeln
+      el.style.textTransform = 'none';
+
+      // Aus dem DOM zusammengesetzten Text erzeugen (inkl. verschachtelter <span>)
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      const textNodes = [];
+      let n; while ((n = walker.nextNode())) textNodes.push(n);
+
+      textNodes.forEach(tn => {
+        let t = tn.nodeValue;
+
+        // Normalisieren: alles klein (um etwaige Uppercase-Quellen zu neutralisieren)
+        // Hinweis: Zahlen/Punkte bleiben unverändert.
+        const lowered = t.toLocaleLowerCase('de-DE');
+
+        // Nur ganze Monats-Wörter ersetzen (mit Wortgrenzen)
+        const fixed = lowered.replace(new RegExp(`\\b(${MONTH_WORDS})\\b`, 'g'), m => MONTH_MAP[m]);
+
+        // In den Textknoten zurückschreiben
+        tn.nodeValue = fixed;
+      });
+    });
   }
 
-  function fixAllHeadlineDates() {
-    document.querySelectorAll('.tl-headline-date').forEach(capitalizeGermanMonthsIn);
-  }
-
-  // Ladeanzeige ausblenden & initial fixen
-  window.timeline.on('loaded', function () {
+  function onLoaded() {
     document.getElementById('timeline-loader').style.display = 'none';
     document.getElementById('timeline-embed').style.display = 'block';
-    fixAllHeadlineDates();
-  });
+    fixHeadlineDates();
+  }
 
-  // Beobachte spätere DOM-Änderungen (Navigation/Slide-Wechsel)
+  window.timeline.on('loaded', onLoaded);
+
+  // Beobachte spätere Slide-Wechsel/Neurender
   const target = document.getElementById('timeline-embed');
-  const obs = new MutationObserver(function () {
-    // minimal debouncen
-    requestAnimationFrame(fixAllHeadlineDates);
+  const obs = new MutationObserver(() => {
+    // Leicht debouncen
+    requestAnimationFrame(() => fixHeadlineDates(target));
   });
-  obs.observe(target, { childList: true, characterData: true, subtree: true });
+  obs.observe(target, { childList: true, subtree: true });
 </script>
 </body>
 </html>
+
