@@ -117,54 +117,58 @@ body {
 #timeline-embed .tl-slide .tl-headline-date .tl-date,
 #timeline-embed .tl-slide .tl-headline-date .tl-date-display {
   text-transform: none !important;
-  letter-spacing: normal !important; /* falls Timeline die Abstände für Uppercase erhöht */
+  letter-spacing: normal !important;
 }
 
-/* === Roboto für alle Texte – Icon-Fonts explizit ausnehmen === */
+/* === Roboto gezielt nur auf Text anwenden (Icons bleiben unberührt) === */
 
-/* 1) Roboto standardmäßig für Text */
-#timeline-embed,
-#timeline-embed * {
-  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
-}
-
-/* 2) AUSNAHMEN: Icon-Fonts & Navigationspfeile NICHT überschreiben */
-#timeline-embed [class^="tl-icon"],
-#timeline-embed [class*=" tl-icon"],
-#timeline-embed .tl-slidenav-next,
-#timeline-embed .tl-slidenav-previous,
-#timeline-embed .tl-slidenav-icon,
-#timeline-embed .tl-menubar-button .tl-icon,
-#timeline-embed .tl-menubar-button .tl-button-icon,
-#timeline-embed .tl-menubar-button [class^="tl-icon"],
-#timeline-embed .tl-menubar-button [class*=" tl-icon"] {
-  font-family: revert !important;   /* nimmt die Icon-Font aus timeline.css */
-  font-style: revert !important;
-  font-weight: revert !important;
-}
-
-/* 3) SVG-Beschriftungen (Zeitachse, Marker) weiterhin Roboto */
-#timeline-embed svg text,
-#timeline-embed .tl-timeaxis svg text {
-  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
-}
-
-/* 4) Typische Textbereiche extra absichern (optional) */
+/* Slides & Inhalt */
 #timeline-embed .tl-slide,
-#timeline-embed .tl-headline,
-#timeline-embed .tl-headline-date,
-#timeline-embed .tl-text-content,
-#timeline-embed .tl-timegroup-message,
+#timeline-embed .tl-slide-content,
+#timeline-embed .tl-slide .tl-text,
+#timeline-embed .tl-slide .tl-text-content,
+#timeline-embed .tl-slide .tl-headline,
+#timeline-embed .tl-slide .tl-headline-date { 
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
+}
+
+/* Timeline-Navigation (Text), Tooltips, Credits */
+#timeline-embed .tl-message,
+#timeline-embed .tl-tooltip,
 #timeline-embed .tl-caption,
 #timeline-embed .tl-credit,
 #timeline-embed .tl-attribution,
-#timeline-embed .tl-message,
 #timeline-embed .tl-slidenav-title,
 #timeline-embed .tl-slidenav-description {
   font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
 }
 
-/* 5) Glättung (v. a. Windows) */
+/* Zeitachse: SVG-Labels */
+#timeline-embed svg text,
+#timeline-embed .tl-timeaxis svg text,
+#timeline-embed .tl-timeaxis,
+#timeline-embed .tl-timeaxis *:not([class*="tl-icon"]) {
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
+}
+
+/* Marker/Items im Timenav (Text in den Kacheln) */
+#timeline-embed .tl-timenav,
+#timeline-embed .tl-timenav *:not([class*="tl-icon"]) {
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
+}
+
+/* WICHTIG: Icon-Fonts nicht überschreiben (Lupe, Pfeile, Menubar-Icons) */
+#timeline-embed [class^="tl-icon"],
+#timeline-embed [class*=" tl-icon"],
+#timeline-embed .tl-slidenav-icon,
+#timeline-embed .tl-slidenav-next,
+#timeline-embed .tl-slidenav-previous,
+#timeline-embed .tl-menubar-button,
+#timeline-embed .tl-menubar-button * {
+  /* keine font-family setzen -> bleibt Icon-Font aus timeline.css */
+}
+
+/* Glättung (v. a. Windows) */
 #timeline-embed {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -193,29 +197,18 @@ body {
     'januar':'Januar','februar':'Februar','märz':'März','april':'April','mai':'Mai','juni':'Juni',
     'juli':'Juli','august':'August','september':'September','oktober':'Oktober','november':'November','dezember':'Dezember'
   };
-  const MONTH_WORDS = Object.keys(MONTH_MAP).join('|'); // regex: januar|februar|...
+  const MONTH_WORDS = Object.keys(MONTH_MAP).join('|');
 
   function fixHeadlineDates(root=document) {
     const nodes = root.querySelectorAll('.tl-headline-date');
     nodes.forEach(el => {
-      // Uppercase aus Timeline-CSS aushebeln
       el.style.textTransform = 'none';
-
-      // Aus dem DOM zusammengesetzten Text erzeugen (inkl. verschachtelter <span>)
       const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
       const textNodes = [];
       let n; while ((n = walker.nextNode())) textNodes.push(n);
-
       textNodes.forEach(tn => {
-        let t = tn.nodeValue;
-
-        // Normalisieren: alles klein
-        const lowered = t.toLocaleLowerCase('de-DE');
-
-        // Nur ganze Monats-Wörter ersetzen
-        const fixed = lowered.replace(new RegExp(`\\b(${MONTH_WORDS})\\b`, 'g'), m => MONTH_MAP[m]);
-
-        tn.nodeValue = fixed;
+        const lowered = tn.nodeValue.toLocaleLowerCase('de-DE');
+        tn.nodeValue = lowered.replace(new RegExp(`\\b(${MONTH_WORDS})\\b`, 'g'), m => MONTH_MAP[m]);
       });
     });
   }
