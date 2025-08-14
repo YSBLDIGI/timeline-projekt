@@ -21,14 +21,14 @@ body {
   background-color: #ffffff;
 }
 
-/* Titel / Headlines (nicht fett, kleiner, BL-Rot) */
+/* Titel / Headlines */
 .tl-slide .tl-headline {
   font-family: 'Roboto', sans-serif !important;
-  color: #ff0000 !important;
-  font-weight: 400 !important;
+  color: #ff0000 !important;          /* BL-Rot */
+  font-weight: 400 !important;         /* nicht fett */
   font-size: 22px !important;
   line-height: 1.3 !important;
-  text-transform: none !important;
+  text-transform: none !important;     /* Groß-/Kleinschreibung beibehalten */
 }
 
 /* Fließtext */
@@ -42,7 +42,7 @@ body {
 
 /* Slide-Hintergrund */
 .tl-slide-content {
-  background-color: #e6f2f2 !important;
+  background-color: #e6f2f2 !important; /* Grau-Blau 01 */
 }
 
 /* Datum / Zeitachsen-Beschriftungen */
@@ -52,14 +52,14 @@ body {
 .tl-slide .tl-headline-date,
 .tl-slide .tl-date {
   font-family: 'Roboto', sans-serif !important;
-  text-transform: none !important;
-  color: #858c8c !important;
+  text-transform: none !important;     /* nichts erzwingen */
+  color: #858c8c !important;           /* Grau-Blau 03 */
 }
 
 /* Jahresgruppen */
 .tl-timegroup-message {
   font-family: 'Roboto', sans-serif !important;
-  background-color: #555959 !important;
+  background-color: #555959 !important; /* Grau-Blau 04 */
   color: #ffffff !important;
   font-weight: 300 !important;
 }
@@ -72,45 +72,12 @@ body {
 }
 .tl-menubar { padding: 6px !important; }
 
-/* Datum oberhalb des Titels in Slides */
-.tl-slide .tl-headline-date {
-  font-family: 'Roboto', sans-serif !important;
-  text-transform: none !important;
-  font-weight: 300 !important;
-}
-
-/* Navigationstitel bei den Pfeilen */
-.tl-slidenav-title {
-  font-family: 'Roboto', sans-serif !important;
-  text-transform: none !important;
-  font-weight: 300 !important;
-}
-
-/* Navigationstext unter dem Titel */
+/* Navigationstitel/-beschreibung */
+.tl-slidenav-title,
 .tl-slidenav-description {
   font-family: 'Roboto', sans-serif !important;
   text-transform: none !important;
   font-weight: 300 !important;
-}
-
-/* Headline-Datum: Lowercase + First letter uppercase */
-.tl-slide .tl-headline-date,
-.tl-slide .tl-headline .tl-headline-date,
-.tl-slide .tl-text .tl-headline-date {
-  font-family: 'Roboto', sans-serif !important;
-  text-transform: lowercase !important;
-  letter-spacing: normal !important;
-}
-.tl-slide .tl-headline-date::first-letter {
-  text-transform: uppercase !important;
-}
-
-/* Fallback */
-.tl-slide .tl-headline-date .tl-date {
-  text-transform: lowercase !important;
-}
-.tl-slide .tl-headline-date .tl-date::first-letter {
-  text-transform: uppercase !important;
 }
 
 /* Mobile */
@@ -124,7 +91,6 @@ body {
     width: 100% !important;
     object-fit: cover !important;
   }
-
   .tl-slide .tl-headline {
     font-size: 18px !important;
     line-height: 1.25 !important;
@@ -155,35 +121,53 @@ body {
 <!-- TimelineJS -->
 <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 <script>
-var options = {
-  language: 'de',
-  initial_zoom: 2
-};
+  var options = {
+    language: 'de',
+    initial_zoom: 2
+  };
 
-var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
+  var sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRhR7GF-0QwHJWGfSOv17aCYvH9z3KiR5rPL1-3Li8lhPVGulJqxB3M4Rmygou29gSdBZz65ylfi_XX/pubhtml';
 
-window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
+  window.timeline = new TL.Timeline('timeline-embed', sheetUrl, options);
 
-// Ladeanzeige ausblenden, sobald geladen & Monatsnamen korrigieren
-window.timeline.on('loaded', function () {
-  document.getElementById('timeline-loader').style.display = 'none';
-  document.getElementById('timeline-embed').style.display = 'block';
+  // Hilfsfunktion: Textknoten in einem Element durchgehen und Monatsnamen kapitalisieren
+  function capitalizeGermanMonthsIn(el) {
+    const map = {
+      'januar':'Januar', 'februar':'Februar', 'märz':'März',
+      'april':'April', 'mai':'Mai', 'juni':'Juni',
+      'juli':'Juli', 'august':'August', 'september':'September',
+      'oktober':'Oktober', 'november':'November', 'dezember':'Dezember'
+    };
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    let node;
+    while ((node = walker.nextNode())) {
+      let t = node.nodeValue;
+      // ganze Wörter ersetzen (inkl. Umlaute)
+      for (const [low, cap] of Object.entries(map)) {
+        t = t.replace(new RegExp("\\b" + low + "\\b", "g"), cap);
+      }
+      node.nodeValue = t;
+    }
+  }
 
-  // Monate in Ranges groß schreiben
-  const monate = [
-    "januar","februar","märz","april","mai","juni",
-    "juli","august","september","oktober","november","dezember"
-  ];
-  
-  document.querySelectorAll('.tl-headline-date').forEach(el => {
-    let text = el.innerHTML;
-    monate.forEach(m => {
-      const regex = new RegExp("\\b" + m + "\\b", "g");
-      text = text.replace(regex, m.charAt(0).toUpperCase() + m.slice(1));
-    });
-    el.innerHTML = text;
+  function fixAllHeadlineDates() {
+    document.querySelectorAll('.tl-headline-date').forEach(capitalizeGermanMonthsIn);
+  }
+
+  // Ladeanzeige ausblenden & initial fixen
+  window.timeline.on('loaded', function () {
+    document.getElementById('timeline-loader').style.display = 'none';
+    document.getElementById('timeline-embed').style.display = 'block';
+    fixAllHeadlineDates();
   });
-});
+
+  // Beobachte spätere DOM-Änderungen (Navigation/Slide-Wechsel)
+  const target = document.getElementById('timeline-embed');
+  const obs = new MutationObserver(function () {
+    // minimal debouncen
+    requestAnimationFrame(fixAllHeadlineDates);
+  });
+  obs.observe(target, { childList: true, characterData: true, subtree: true });
 </script>
 </body>
 </html>
