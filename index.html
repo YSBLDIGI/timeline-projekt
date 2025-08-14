@@ -107,6 +107,19 @@ body {
     padding: 4px 8px !important;
   }
 }
+
+/* Fix: Uppercase auf Datumszeile über dem Titel zuverlässig deaktivieren */
+#timeline-embed .tl-slide .tl-headline-date,
+#timeline-embed .tl-slide .tl-headline-date *,
+#timeline-embed .tl-slide .tl-headline .tl-headline-date,
+#timeline-embed .tl-slide .tl-text .tl-headline-date,
+#timeline-embed .tl-slide .tl-headline-date .tl-headline-date-text,
+#timeline-embed .tl-slide .tl-headline-date .tl-date,
+#timeline-embed .tl-slide .tl-headline-date .tl-date-display {
+  text-transform: none !important;
+  letter-spacing: normal !important; /* falls Timeline die Abstände für Uppercase erhöht */
+}
+  
 </style>
 </head>
 <body>
@@ -178,4 +191,5 @@ body {
 </script>
 </body>
 </html>
+
 
