@@ -173,6 +173,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+  /* Roboto gezielt für Fließtext erzwingen (überschreibt Source Sans Pro) */
+#timeline-embed .tl-slide .tl-text-content,
+#timeline-embed .tl-slide .tl-text-content p,
+#timeline-embed .tl-slide .tl-text-content * {
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif !important;
+}
+
 </style>
 </head>
 <body>
@@ -230,3 +238,4 @@ body {
 </script>
 </body>
 </html>
+
